@@ -33,24 +33,36 @@ namespace FullProject
 
             while (machineRunning)
             {
-            string request = userQuestion();
+                string request = userQuestion();
 
-            if(request == "exit")
+                if(request == "exit")
+                    {
+                        Console.WriteLine("Goodybye!....");
+                        break;
+                    }
+
+                editVehicle(ref vehicles, request);
+
+                Console.WriteLine();
+                while(true)
                 {
-                    Console.WriteLine("Goodybye!....");
-                    break;
-                }
+                    Console.Write("Are you finished? (yes/no): ");
+                    string? carryOn = Console.ReadLine().ToLower();
+                    if (carryOn.ToLower() != "yes" && carryOn.ToLower() != "no")
+                    {
+                        Console.WriteLine("Please input a valid response (yes/no)");
+                        continue;
+                    }
 
-            editVehicle(ref vehicles, request);
+                    if(carryOn?.ToLower() == "yes")
+                    {
+                        Console.WriteLine("Goodybye!....");
+                        machineRunning = false;
+                        return;
+                    } else {
+                        break;
+                    }
 
-            Console.WriteLine();
-            Console.Write("Are you finished? (yes/no): ");
-            string? carryOn = Console.ReadLine();
-
-            if(carryOn?.ToLower() == "yes")
-                {
-                    Console.WriteLine("Goodybye!....");
-                    machineRunning = false;
                 }
             }
         }
